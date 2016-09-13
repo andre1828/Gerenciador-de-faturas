@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="third_libs/normalize.min.css">
+    <link rel="stylesheet" href="third_libs/skeleton.min.css">
+    <title>Gerenciador de Faturas</title>
+</head>
+
+<body id="app">
+    <div class="container">
+        <div class="row">
+            <input class="twelve columns" v-model="searchQuery" type="text" placeholder="Buscar">
+        </div>
+        <div class="row">
+            <form>
+                <input class="three columns" v-model="name" v-on:keyup.enter="addEntry()" type="text" placeholder="Nome">
+                <input class="three columns" v-model="date" v-on:keyup.enter="addEntry()" type="text" placeholder="Data">
+                <input class="three columns" v-model="value" v-on:keyup.enter="addEntry()" type="text" placeholder="Valor">
+                <button class="button-primary three columns" v-on:keyup.enter="addEntry()" v-on:click="addEntry()" type="button" >Adicionar</button>
+                <button class="three columns" v-on:click="getTotal()" type="button" >Calcular total</button>
+            </form>
+        </div>
+        <div class="row" v-show="numSelectedEntries()> 0">
+            <button class="three columns" type="button" v-on:click="sumValues()">Somar seleções(valor)</button>
+        </div>
+        <h2>{{result}}</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <table class="twelve columns">
+                <thead>
+                    <th><input type="checkbox" v-model="universalCheckBox" v-on:click="toggleAll()"></th>
+                    <th>Nome</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                </thead>
+                <tbody id="entryList">
+                    <tr v-for="entry in entries" v-show="!searchQuery || performSearch(entry.name)">
+                        <td><input v-model="entry.selected" type="checkbox"></td>
+                        <td>{{entry.name}}</td>
+                        <td>{{entry.date}}</td>
+                        <td>{{entry.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="third_libs/vue.js"></script>
+<script type="text/javascript" src="engine.js"></script>
+
+</html>

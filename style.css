@@ -1,0 +1,28 @@
+input, button {
+  box-sizing: border-box;
+}
+
+.selectedRow {
+  border-style: dashed; 2px;
+  border-color: rgb(89, 171, 227);
+}
+.nonSelectedRow {
+  border-style: none;
+}
+
+.invalidInput {
+  background-color: rgb(239, 72, 54);
+}
+
+.defaultStyle {
+  background-color: #fff;
+}
+
+@keyframes invalidInput {
+  from {
+    background-color: #fff;
+  }
+  to {
+    background-color: rgb(239, 72, 54);
+  }
+}
